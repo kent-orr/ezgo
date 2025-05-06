@@ -1,3 +1,4 @@
+
 function rgb_toggle(destination) {
     const url = new URL(`${window.location.origin}/rgb/${destination}`);
     fetch(url, {
@@ -36,3 +37,23 @@ function rgb_set(destination, hex_color) {
             console.log(data);
         })
     }
+
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const ids = ['cabin', 'underglow'];
+    ids.forEach(id => {
+        fetch(`${window.location.origin}/rgb/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById(id).value = rgbToHex(data.r, data.g, data.b);
+        });
+    });
+});

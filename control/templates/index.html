@@ -13,7 +13,7 @@
             <button class="btn btn-primary w-50 me-2" onclick="rgb_toggle('underglow')">
                 Underglow <i class="fas fa-power-off"></i>
             </button>
-            <input type="color" class="btn btn-secondary w-25" onchange="rgb_set('underglow', this.value)">
+            <input id="underglow" type="color" class="btn btn-secondary w-25" onchange="rgb_set('underglow', this.value)">
         </div>
     </div>
 
@@ -23,7 +23,7 @@
             <button class="btn btn-primary w-50 me-2" onclick="rgb_toggle('cabin')">
                 Cabin Lights <i class="fas fa-power-off"></i>
             </button>
-            <input type="color" class="btn btn-secondary w-25" onchange="rgb_set('cabin', this.value)">
+            <input id="cabin" type="color" class="btn btn-secondary w-25" onchange="rgb_set('cabin', this.value)">
         </div>
     </div>
 

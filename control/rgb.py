@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
-from ..app_state import AppState
-from ..rgb_controller import RGBController
+from .app_state import AppState
+from .rgb_controller import RGBController
 
 rgb_bp = Blueprint('rgb', __name__, template_folder='templates')
 
