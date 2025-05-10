@@ -1,14 +1,17 @@
 from flask import Blueprint, render_template, request
-from .app_state import AppState
 from .rgb_controller import RGBController
 
 rgb_bp = Blueprint('rgb', __name__, template_folder='templates')
 
-app_state = AppState.load()
+
 
 @rgb_bp.route('/<destination>', methods=['GET', 'POST', 'DELETE'])
 def rgb(destination):
-    controller = app_state.rgb.get(destination.lower())
+    destination_state = app_state.rgb.get(destination.lower())
+    controller = RGBController(
+        destination_state.as_dict(), 
+        getattr(board, destination.lower())
+        )
     
     if request.method == 'POST':
         controller.set_rgb(request.json.get('hexcode'))
