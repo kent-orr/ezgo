@@ -41,3 +41,26 @@ class GPIOBoard:
         GPIO.cleanup()
         self.allocated.clear()
         self.services.clear()
+
+
+class GPIORGB:
+    def __init__(self, r_pin, g_pin, b_pin, gpio_board):
+        self.gpio = gpio_board
+        self.pins = {'r': r_pin, 'g': g_pin, 'b': b_pin}
+        self.pwms = {}
+
+        for color, pin in self.pins.items():
+            self.gpio.reserve_pin(pin, GPIO.OUT, service_name='cabin_lights')
+            pwm = GPIO.PWM(pin, 1000)  # 1kHz PWM
+            pwm.start(0)  # Start with LED off
+            self.pwms[color] = pwm
+
+    def set_rgb(self, r, g, b):
+        # Convert 0–255 range to 0–100% duty cycle
+        for color, value in zip(('r', 'g', 'b'), (r, g, b)):
+            duty_cycle = max(0, min(100, (value / 255) * 100))
+            self.pwms[color].ChangeDutyCycle(duty_cycle)
+
+    def cleanup(self):
+        for pwm in self.pwms.values():
+            pwm.stop()
