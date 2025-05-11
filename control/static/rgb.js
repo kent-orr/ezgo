@@ -23,7 +23,7 @@ function rgb_set(destination, hex_color) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({hexcode: hex_color })
+        body: JSON.stringify({hex: hex_color })
         }).then(response => {
             if (response.ok) {
                 if (response.status === 200) {
@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(`${window.location.origin}/rgb/${id}`)
         .then(response => response.json())
         .then(data => {
-            document.getElementById(id).value = rgbToHex(data.r, data.g, data.b);
+            console.log(data);
+            document.getElementById(id).value = rgbToHex(data.last_color.r, data.last_color.g, data.last_color.b);
         });
     });
 });

@@ -4,8 +4,6 @@
 
 <script src="{{url_for('static', filename='rgb.js')}}"></script>
 
-<h2>Here we go</h2>
-
 <div class="container">
     <!-- Underglow Button with Separate Color Picker -->
     <div class="row mb-3">
@@ -27,17 +25,7 @@
         </div>
     </div>
 
-    <!-- Radio Button with Separate Gear Icon -->
-    <div class="row">
-        <div class="col-12 col-md-6 d-flex justify-content-center">
-            <button class="btn btn-primary w-50 me-2" onclick="toggle_radio()">
-                Radio <i class="fas fa-power-off"></i>
-            </button>
-            <a href="/radio-settings" class="btn btn-secondary w-25">
-                <i class="fas fa-cog"></i>
-            </a>
-        </div>
-    </div>
+
 </div>
 
 {% endblock %}
